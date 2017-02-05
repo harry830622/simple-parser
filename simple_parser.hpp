@@ -34,12 +34,14 @@ class Parser {
   }
 
  private:
+  bool IsDelimiter(char c) { return delimiters_.find(c) != std::string::npos; }
+
   Tokens Tokenize(const std::string& str) {
     Tokens tokens;
 
     Token token;
     for (const char c : str) {
-      if (delimiters_.find(c) != std::string::npos) {
+      if (IsDelimiter(c)) {
         if (!token.empty()) {
           tokens.push_back(token);
           token.clear();
